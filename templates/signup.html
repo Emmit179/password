@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+</head>
+<body>
+
+    <div class="form">
+        <form action="#" method="post" id="signUp">
+            <h2>Sign Up</h2>
+            <div class="input">
+                <div class="text">
+                    <input type="text" placeholder="Name" id="name" required/>
+                </div>
+                <button class="clear">
+                    <svg viewBox="0 0 24 24">
+                        <path class="line" d="M2 2L22 22" />
+                        <path class="long" d="M9 15L20 4" />
+                        <path class="arrow" d="M13 11V7" />
+                        <path class="arrow" d="M17 11H13" />
+                    </svg>
+                </button>
+            </div>
+<br>
+
+            <div class="input">
+                <div class="text">
+                    <input type="text" placeholder="Email" id="email" required/>
+                </div>
+                <button class="clear">
+                    <svg viewBox="0 0 24 24">
+                        <path class="line" d="M2 2L22 22" />
+                        <path class="long" d="M9 15L20 4" />
+                        <path class="arrow" d="M13 11V7" />
+                        <path class="arrow" d="M17 11H13" />
+                    </svg>
+                </button>
+            </div>
+
+<br>
+            
+            <div class="input">
+                <div class="text">
+                    <input type="password" placeholder="Password" id="password" required/>
+                </div>
+                <button class="clear">
+                    <svg viewBox="0 0 24 24">
+                        <path class="line" d="M2 2L22 22" />
+                        <path class="long" d="M9 15L20 4" />
+                        <path class="arrow" d="M13 11V7" />
+                        <path class="arrow" d="M17 11H13" />
+                    </svg>
+                </button>
+            </div>
+
+            <br>
+
+
+            <input type="submit" value="Sign Up" class="submit">
+            
+        </form>
+    </div>
+
+  <script>
+    async function postData(url = '', data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+        }
+
+
+    document.getElementById("signUp").addEventListener("submit", function(e){
+        e.preventDefault()
+
+
+        
+
+        postData('http://127.0.0.1:5000/user', { "name": document.getElementById("name").value, "email": document.getElementById("email").value, "password": document.getElementById("password").value })
+        .then((data) => {
+            if(data.message === "new user created"){
+                alert("user created!")
+            }
+        });
+
+    })
+
+
+    
+  </script>
+
+  <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/javascript.js')}}"></script>
+</body>
+</html>

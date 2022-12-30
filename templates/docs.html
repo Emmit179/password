@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/docs.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <title>Docs</title>
+</head>
+<body>
+
+<br>
+    <div class="container">
+
+        <h1 style="display: inline;">AI Password Strength API Documentation </h1>
+        <h3 style="display: inline;" class="text-secondary">version v1</h3><br><br>
+        <p>http://127.0.0.1:5000/*</p><br>
+        <hr style="width: 100%;"><br>
+
+        <!-- <h3>Common</h3> -->
+        
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingPre">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePre" aria-expanded="true" aria-controls="collapsePre">
+                    /user&emsp;<span class="badge bg-success" style="float: right;">POST</span>
+                  </button>
+                </h2>
+                <div id="collapsePre" class="accordion-collapse collapse show" aria-labelledby="headingPre" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <strong>Description: </strong>Create account <br><br>
+                    <strong>Body: </strong> <code>{ "name": {username}, "email": {email}, "password": {password} }</code><br><br>
+                    <strong>Response: </strong><code>{ "message": "new user created" }</code>
+                  </div>
+                </div>
+              </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  /login&emsp;<span class="badge bg-secondary" style="float: right;">AUTH</span>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>Description: </strong>Login with user credentials to get token <br><br>
+                  <strong>Body: </strong> <code>Username: {name}, Password: {password}</code><br><br>
+                  <strong>Response: </strong><code>{ "token": {token} }</code>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  /strength&emsp;<span class="badge bg-primary" style="float: right;">GET</span>
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>Description: </strong>Get the strength of a password <br><br>
+                  <strong>Headers: </strong><code>x-access-token: {token}</code><br><br>
+                  <strong>Body: </strong><code>{ "text": {testing password} }</code><br><br>
+                  <strong>Response: </strong><code>{ "strength": {strength}, "text": {testing password}, "status_code":200 }</code>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+    </div>
+    
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+    <script src="{{url_for('static', filename='js/docs.js')}}"></script>  
+</body>
+</body>
+</html>

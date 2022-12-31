@@ -8,10 +8,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 import datetime
 from functools import wraps
+import os
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
-app.config['SECRET_KEY'] = $SECRET_KEY
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///C:/Users/thesa\OneDrive\Documents/api-flask/password.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

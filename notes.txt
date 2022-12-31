@@ -1,7 +1,0 @@
-style: old french detective
-
-background: #fff1e6
-secondary: #e2cfc4
-primary: #c9e4de
-
-to do

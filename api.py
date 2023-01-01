@@ -164,7 +164,7 @@ def delete_user(current_user, public_id):
 @app.route('/login')
 def login():
     print(app.config['SECRET_KEY'])
-    return true
+    return jsonify({"message: ": "done"})
     auth = request.authorization
 
     if not auth or not auth.username or not auth.password:

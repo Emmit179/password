@@ -98,6 +98,8 @@ def get_one_user(current_user, public_id):
 @app.route('/user', methods=['POST'])
 # @token_required
 def create_user():
+    
+    data = request.get_json()
 
     # if not current_user.admin:
     #     return jsonify({'message: ': 'cannot perform that function'})
@@ -114,7 +116,7 @@ def create_user():
         return jsonify({"message: ": "email taken"})
 
 
-    data = request.get_json()
+ 
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
 

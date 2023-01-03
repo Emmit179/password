@@ -113,12 +113,12 @@ def create_user():
     #     return jsonify({'message: ': 'cannot perform that function'})
 
 
-    name = db.collection('users').find_one(name=data['name'])
+    name = db.users.find_one(name=data['name'])
 
     if name:
         return jsonify({"message: ": "username taken"})
 
-    email = db.collection('users').find_one(name=data['email'])
+    email = db.users.find_one(name=data['email'])
 
     if email:
         return jsonify({"message: ": "email taken"})
@@ -128,7 +128,7 @@ def create_user():
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
 
-    db.collection('users').insert_one(public_id=str(uuid.uuid4()), name=data['name'], email=data['email'], password=hashed_password, admin=False)
+    db.users.insert_one(public_id=str(uuid.uuid4()), name=data['name'], email=data['email'], password=hashed_password, admin=False)
 
 
     return jsonify({'message': 'new user created'})

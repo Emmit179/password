@@ -9,24 +9,32 @@ import jwt
 import datetime
 from functools import wraps
 import os
+from pymongo import MongoClient
+
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///../password.db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///../password.db"
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['username'] = os.getenv('username')
+app.config['password'] = os.getenv('password')
 
 app.app_context().push()
 
-db = SQLAlchemy(app)
+client = MongoClient("mongodb+srv://"+app.config['username']+":"+app.config['password']+"@cluster0.c19uj.mongodb.net/?retryWrites=true&w=majority", server_api=ServerApi('1'))
+db = client.test
+    
+    
+# db = SQLAlchemy(app)
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    public_id = db.Column(db.String(50), unique=True)
-    name = db.Column(db.String(50), unique=True)
-    email = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(80))
-    admin = db.Column(db.Boolean)
+class users(db.Document):
+#     id = db.Column(db.Integer, primary_key=True)
+    public_id = StringField(max_length=50, required=True, unique=True)
+    name = StringField(max_length=50, required=True, unique=True)
+    email = StringField(max_length=50, required=True, unique=True)
+    password = StringField(max_length=80, required=True)
+    admin = BooleanField()
 
 
 def token_required(f):
@@ -105,12 +113,12 @@ def create_user():
     #     return jsonify({'message: ': 'cannot perform that function'})
 
 
-    name = User.query.filter_by(name=data['name']).first()
+    name = users.query.filter_by(name=data['name']).first()
 
     if name:
         return jsonify({"message: ": "username taken"})
 
-    email = User.query.filter_by(name=data['email']).first()
+    email = users.query.filter_by(name=data['email']).first()
 
     if email:
         return jsonify({"message: ": "email taken"})
@@ -120,9 +128,8 @@ def create_user():
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
 
-    new_user = User(public_id=str(uuid.uuid4()), name=data['name'], email=data['email'], password=hashed_password, admin=False)
-    db.session.add(new_user)
-    db.session.commit()
+    users(public_id=str(uuid.uuid4()), name=data['name'], email=data['email'], password=hashed_password, admin=False).save()
+
 
     return jsonify({'message': 'new user created'})
 

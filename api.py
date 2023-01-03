@@ -30,11 +30,11 @@ db = client.test
 
 class users(db.Document):
 #     id = db.Column(db.Integer, primary_key=True)
-    public_id = str
-    name = str
-    email = str
-    password = str
-    admin = bool
+    public_id = db.StringField(required=True)
+    name = db.StringField(required=True)
+    email = db.StringField(required=True)
+    password = db.StringField()
+    admin = db.BooleanField(required=True)
 
 
 def token_required(f):

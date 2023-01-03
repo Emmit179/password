@@ -22,6 +22,8 @@ app.config['password'] = os.getenv('password')
 
 app.app_context().push()
 
+print(app.config['username'])
+
 client = MongoClient("mongodb+srv://"+app.config['username']+":"+app.config['password']+"@cluster0.c19uj.mongodb.net/?retryWrites=true&w=majority")
 db = client.test
     

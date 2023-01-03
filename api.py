@@ -119,7 +119,7 @@ def create_user():
     
 #     name = list(name)
     
-    print(name)
+#     print(name)
 
     if name > 0:
         return jsonify({"message: ": "username taken"})

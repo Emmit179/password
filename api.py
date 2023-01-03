@@ -22,7 +22,7 @@ app.config['password'] = os.getenv('password')
 
 app.app_context().push()
 
-client = MongoClient("mongodb+srv://"+app.config['username']+":"+app.config['password']+"@cluster0.c19uj.mongodb.net/?retryWrites=true&w=majority", server_api=ServerApi('1'))
+client = MongoClient("mongodb+srv://"+app.config['username']+":"+app.config['password']+"@cluster0.c19uj.mongodb.net/?retryWrites=true&w=majority")
 db = client.test
     
     

@@ -113,18 +113,18 @@ def create_user():
     #     return jsonify({'message: ': 'cannot perform that function'})
 
 
-    name = db.users.find({},{"name":data['name']})
+    name = db.users.find({},{"name":data['name']}).count()
     
 #     name = list(name)
     
-    print(name.count())
+    print(name)
 
-    if name.count() > 0:
+    if name > 0:
         return jsonify({"message: ": "username taken"})
 
-    email = db.users.find({},{"name":data['email']})
+    email = db.users.find({},{"name":data['email']}).count()
 
-    if email.count() > 0:
+    if email > 0:
         return jsonify({"message: ": "email taken"})
 
 

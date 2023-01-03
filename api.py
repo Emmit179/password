@@ -113,12 +113,12 @@ def create_user():
     #     return jsonify({'message: ': 'cannot perform that function'})
 
 
-    name = db.collection('users').query.filter_by(name=data['name']).first()
+    name = db.collection('users').find_one(name=data['name'])
 
     if name:
         return jsonify({"message: ": "username taken"})
 
-    email = db.collection('users').query.filter_by(name=data['email']).first()
+    email = db.collection('users').find_one(name=data['email'])
 
     if email:
         return jsonify({"message: ": "email taken"})

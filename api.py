@@ -30,7 +30,6 @@ db = client.test
 
 class users(db.Document):
 #     id = db.Column(db.Integer, primary_key=True)
-    id: Optional[PydanticObjectId] = Field(None, alias="_id")
     public_id = str
     name = str
     email = str

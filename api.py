@@ -28,13 +28,13 @@ db = client.test
     
 # db = SQLAlchemy(app)
 
-class users(db.Document):
-#     id = db.Column(db.Integer, primary_key=True)
-    public_id = db.StringField(required=True)
-    name = db.StringField(required=True)
-    email = db.StringField(required=True)
-    password = db.StringField()
-    admin = db.BooleanField(required=True)
+# class users(db.Document):
+# #     id = db.Column(db.Integer, primary_key=True)
+#     public_id = db.StringField(required=True)
+#     name = db.StringField(required=True)
+#     email = db.StringField(required=True)
+#     password = db.StringField()
+#     admin = db.BooleanField(required=True)
 
 
 def token_required(f):
@@ -113,12 +113,12 @@ def create_user():
     #     return jsonify({'message: ': 'cannot perform that function'})
 
 
-    name = users.query.filter_by(name=data['name']).first()
+    name = db.collection('users').query.filter_by(name=data['name']).first()
 
     if name:
         return jsonify({"message: ": "username taken"})
 
-    email = users.query.filter_by(name=data['email']).first()
+    email = db.collection('users').query.filter_by(name=data['email']).first()
 
     if email:
         return jsonify({"message: ": "email taken"})
@@ -128,7 +128,7 @@ def create_user():
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
 
-    users(public_id=str(uuid.uuid4()), name=data['name'], email=data['email'], password=hashed_password, admin=False).save()
+    db.collection('users').insert_one(public_id=str(uuid.uuid4()), name=data['name'], email=data['email'], password=hashed_password, admin=False)
 
 
     return jsonify({'message': 'new user created'})

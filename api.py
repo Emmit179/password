@@ -28,13 +28,14 @@ db = client.test
     
 # db = SQLAlchemy(app)
 
-class users(db.Document):
+class users(BaseModel):
 #     id = db.Column(db.Integer, primary_key=True)
-    public_id = db.StringField(max_length=50, required=True, unique=True)
-    name = db.StringField(max_length=50, required=True, unique=True)
-    email = db.StringField(max_length=50, required=True, unique=True)
-    password = db.StringField(max_length=80, required=True)
-    admin = db.BooleanField()
+    id: Optional[PydanticObjectId] = Field(None, alias="_id")
+    public_id = str
+    name = str
+    email = str
+    password = str
+    admin = bool
 
 
 def token_required(f):

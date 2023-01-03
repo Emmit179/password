@@ -146,13 +146,12 @@ def promote_user(public_id):
 #     if not current_user.admin:
 #         return jsonify({'message: ': 'cannot perform that function'})
 
-    user = User.query.filter_by(public_id=public_id).first()
+    user = db.users.find_one({"public_id":public_id})
 
     if not user:
         return jsonify({"message: ": "no user found"})
 
-    user.admin = True
-    db.session.commit()
+    db.users.update_one({"public_id":public_id}, {"admin":True})
 
     return jsonify({"message: ": "the user has been promoted"})
 
@@ -182,7 +181,7 @@ def login():
     if not auth or not auth.username or not auth.password:
         return make_response('could not verify', 401, {'WWW-Authenticate':'Basic realm="Login required!"'})
 
-    user = User.query.filter_by(name=auth.username).first()
+    user = db.users.find_one({"name":auth.username})
 
     if not user:
         return make_response('could not verify', 401, {'WWW-Authenticate':'Basic realm="Login required!"'})

@@ -151,7 +151,7 @@ def promote_user(public_id):
     if not user:
         return jsonify({"message: ": "no user found"})
 
-    db.users.update_one({"public_id":public_id}, {"admin":True})
+    db.users.update_one({"public_id":public_id}, {"$set": {"admin":True}})
 
     return jsonify({"message: ": "the user has been promoted"})
 

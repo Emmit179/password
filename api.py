@@ -114,6 +114,8 @@ def create_user():
 
 
     name = db.users.find({},{"name":data['name']})
+    
+    print(name)
 
     if name:
         return jsonify({"message: ": "username taken"})

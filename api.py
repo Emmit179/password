@@ -134,7 +134,7 @@ def create_user():
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
 
-    db.users.insert_one(public_id=str(uuid.uuid4()), name=data['name'], email=data['email'], password=hashed_password, admin=False)
+    db.users.insert_one({"public_id":str(uuid.uuid4()), "name":data['name'], "email":data['email'], "password":hashed_password, "admin":False})
 
 
     return jsonify({'message': 'new user created'})

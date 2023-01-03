@@ -117,16 +117,14 @@ def create_user():
     
 #     name = list(name)
     
-    print(len(name))
+    print(name.count())
 
-    if len(name) > 0:
+    if name.count() > 0:
         return jsonify({"message: ": "username taken"})
 
     email = db.users.find({},{"name":data['email']})
-    
-    email = list(email)
 
-    if len(email) > 0:
+    if email.count() > 0:
         return jsonify({"message: ": "email taken"})
 
 

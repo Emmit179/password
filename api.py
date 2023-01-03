@@ -113,7 +113,7 @@ def create_user():
     #     return jsonify({'message: ': 'cannot perform that function'})
 
 
-    name = db.users.find({},{"name":data['name']})
+    name = db.users.find_one({},{"name":data['name']})
     
     print(name)
 

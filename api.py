@@ -113,7 +113,7 @@ def create_user():
     #     return jsonify({'message: ': 'cannot perform that function'})
 
 
-    name = db.users.count({"name":data['name']}).count_documents({})
+    name = db.users.count_documents({"name":data['name']})
     
 #     name = list(name)
     
@@ -122,7 +122,7 @@ def create_user():
     if name > 0:
         return jsonify({"message: ": "username taken"})
 
-    email = db.users.count({"name":data['email']})
+    email = db.users.count_documents({"name":data['email']})
 
     if email > 0:
         return jsonify({"message: ": "email taken"})

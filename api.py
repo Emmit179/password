@@ -140,11 +140,11 @@ def create_user():
     return jsonify({'message': 'new user created'})
 
 @app.route('/user/<public_id>', methods=['PUT'])
-@token_required
-def promote_user(current_user, public_id):
+# @token_required
+def promote_user(public_id):
 
-    if not current_user.admin:
-        return jsonify({'message: ': 'cannot perform that function'})
+#     if not current_user.admin:
+#         return jsonify({'message: ': 'cannot perform that function'})
 
     user = User.query.filter_by(public_id=public_id).first()
 
